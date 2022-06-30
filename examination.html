@@ -1,0 +1,258 @@
+<html>
+<head>
+    <link href="asset/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="asset/image/pizza1.jpg" class="product-thumbnail" alt="Pizza 1">
+                <div class="product-title"> Pizza Name 1 </div>
+                <div class="product-price"> $ 8 </div>
+                <input type="radio" onclick="selectMenu(1)" name="menu">
+            </div>
+            <div class="grid-item">
+                <img src="asset/image/pizza2.jpg" class="product-thumbnail" alt="Pizza 2">
+                <div class="product-title"> Pizza Name 2 </div>
+                <div class="product-price"> $ 10 </div>
+                <input type="radio" onclick="selectMenu(2)" name="menu">
+            </div>
+            <div class="grid-item">
+                <img src="asset/image/pizza3.jpg" class="product-thumbnail" alt="Pizza 3">
+                <div class="product-title"> Pizza Name 3 </div>
+                <div class="product-price"> $ 12 </div>
+                <input type="radio" onclick="selectMenu(3)" name="menu">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h1> Size </h1>
+        <input type="radio" onclick="selectSize()" id="small" name="size" value="small">
+        <label for="small">Small</label>
+        
+        <input type="radio" onclick="selectSize()" id="medium" name="size" value="medium">
+        <label for="medium">Medium</label>
+        
+        <input type="radio" onclick="selectSize()" id="large"  name="size" value="large">
+        <label for="large">Large</label>
+    </section>
+
+    <section>
+        <h1> Toppings </h1>
+        <input type="checkbox" id="avocado" name="topping" value="1" onclick="selectTopping()">
+        <label for="avocado">Avocado</label>
+        
+        <input type="checkbox" id="lobster" name="topping" value="2" onclick="selectTopping()">
+        <label for="lobster">Lobster</label>
+        
+        <input type="checkbox" id="bacon" name="topping" value="3" onclick="selectTopping()">
+        <label for="bacon">Bacon</label>
+
+        <br>
+
+        <input type="checkbox" id="broccoli" name="topping" value="1" onclick="selectTopping()">
+        <label for="broccoli">Broccoli</label>
+        
+        <input type="checkbox" id="oyster" name="topping" value="2" onclick="selectTopping()">
+        <label for="oyster">Oyster</label>
+        
+        <input type="checkbox" id="duck" name="size" value="3" onclick="selectTopping()">
+        <label for="duck">Duck</label>
+
+        <br>
+
+        <input type="checkbox" id="onions" name="topping" value="1" onclick="selectTopping()">
+        <label for="onions">Onions</label>
+        
+        <input type="checkbox" id="salmon" name="topping" value="2" onclick="selectTopping()">
+        <label for="salmon">Salmon</label>
+        
+        <input type="checkbox" id="ham" name="topping" value="3" onclick="selectTopping()">
+        <label for="ham">Ham</label>
+
+        <br>
+
+        <input type="checkbox" id="zucchini" name="topping" value="1" onclick="selectTopping()">
+        <label for="zucchini">Zucchini</label>
+        
+        <input type="checkbox" id="tuna" name="topping" value="2" onclick="selectTopping()">
+        <label for="tuna">Tuna</label>
+        
+        <input type="checkbox" id="sausage" name="topping" value="3" onclick="selectTopping()">
+        <label for="sausage">Sausage</label>
+    </section>
+
+    <section style="text-align:center; font-size: 30px; font-weight: bold;">
+        <span> PRICE : <div id="price"> </span>
+    </section>
+</body>
+
+<script>
+const menus = [
+    {
+        id : 1,
+        name : "Pizza 1", 
+        price : 8,
+    },
+    {
+        id : 2,
+        name : "Pizza 2", 
+        price : 10,
+    },
+    {
+        id : 3,
+        name : "Pizza 3", 
+        price : 12,
+    },
+];
+
+var selectedMenu = []
+var selectedSize = ''
+var selectedTopping = []
+
+var totalMenu = 0
+var totalSize = 0
+var totalTopping = 0
+
+var total = 0
+
+document.getElementById("price").innerHTML = this.total
+
+function selectMenu(id) {
+    this.selectedMenu = menus.filter(function (el) {
+        return el.id == id
+    });
+    this.totalMenu = selectedMenu[0].price
+    this.total = this.totalMenu + this.totalSize + this.totalTopping
+    document.getElementById("price").innerHTML = '$'+this.total
+
+    if(this.selectedMenu[0].id == 1) {
+        //DISABLED
+        document.getElementById("lobster").disabled = true;
+        document.getElementById("lobster").checked = false;
+
+        document.getElementById("oyster").disabled = true;
+        document.getElementById("oyster").checked = false;
+
+        document.getElementById("salmon").disabled = true;
+        document.getElementById("salmon").checked = false;
+
+        document.getElementById("bacon").disabled = true;
+        document.getElementById("bacon").checked = false;
+
+        document.getElementById("duck").disabled = true;
+        document.getElementById("duck").checked = false;
+
+        document.getElementById("sausage").disabled = true;
+        document.getElementById("sausage").checked = false;
+
+        //ENABLED
+        document.getElementById("avocado").disabled = false;
+        document.getElementById("broccoli").disabled = false;
+        document.getElementById("onions").disabled = false;
+        document.getElementById("zucchini").disabled = false;
+        document.getElementById("tuna").disabled = false;
+        document.getElementById("ham").disabled = false;
+
+        this.selectTopping()
+
+    } else if (this.selectedMenu[0].id == 2) {
+        //DISABLED
+        document.getElementById("avocado").disabled = true;
+        document.getElementById("avocado").checked = false;
+
+        document.getElementById("tuna").disabled = true;
+        document.getElementById("tuna").checked = false;
+
+        document.getElementById("duck").disabled = true;
+        document.getElementById("duck").checked = false;
+
+        document.getElementById("sausage").disabled = true;
+        document.getElementById("sausage").checked = false;
+
+        //ENABLED
+        document.getElementById("broccoli").disabled = false;
+        document.getElementById("onions").disabled = false;
+        document.getElementById("zucchini").disabled = false;
+        document.getElementById("lobster").disabled = false;
+        document.getElementById("oyster").disabled = false;
+        document.getElementById("salmon").disabled = false;
+        document.getElementById("ham").disabled = false;
+        document.getElementById("bacon").disabled = false;
+
+        this.selectTopping()
+
+    } else if (this.selectedMenu[0].id == 3) {
+        //DISABLED
+        document.getElementById("avocado").disabled = true;
+        document.getElementById("avocado").checked = false;
+
+        document.getElementById("lobster").disabled = true;
+        document.getElementById("lobster").checked = false;
+
+        document.getElementById("oyster").disabled = true;
+        document.getElementById("oyster").checked = false;
+
+        document.getElementById("salmon").disabled = true;
+        document.getElementById("salmon").checked = false;
+
+        //ENABLED
+        document.getElementById("broccoli").disabled = false;
+        document.getElementById("onions").disabled = false;
+        document.getElementById("zucchini").disabled = false;
+        document.getElementById("tuna").disabled = false;
+        document.getElementById("bacon").disabled = false;
+        document.getElementById("duck").disabled = false;
+        document.getElementById("ham").disabled = false;
+        document.getElementById("sausage").disabled = false;
+    } else {
+
+    }
+}
+
+function selectSize() {
+    if(this.selectedMenu.length <= 0) { 
+        alert("Pilih Menu")
+        document.getElementById('small').checked = false
+        document.getElementById('medium').checked = false
+        document.getElementById('large').checked = false
+    } else {
+        if (document.getElementById('small').checked) {
+            let selectedSizeTemporary = document.getElementById("small").value
+            this.selectedSize = selectedSizeTemporary
+            this.totalSize = -1
+            this.total = this.totalMenu + this.totalSize + this.totalTopping
+            document.getElementById("price").innerHTML = '$'+this.total
+        }
+        if (document.getElementById('medium').checked) {
+            let selectedSizeTemporary = document.getElementById("medium").value
+            this.selectedSize = selectedSizeTemporary
+            this.totalSize = 0
+            this.total = this.totalMenu + this.totalSize + this.totalTopping
+            document.getElementById("price").innerHTML = '$'+this.total
+        }
+        if (document.getElementById('large').checked) {
+            let selectedSizeTemporary = document.getElementById("large").value
+            this.selectedSize = selectedSizeTemporary
+            this.totalSize = 2
+            this.total = this.totalMenu + this.totalSize + this.totalTopping
+            document.getElementById("price").innerHTML = '$'+this.total
+        }
+    }
+}
+
+function selectTopping() {
+    let input = document.getElementsByName("topping");
+    let totalToppings = 0;
+    for (var i = 0; i < input.length; i++) {
+        if (input[i].checked) {
+            totalToppings += parseFloat(input[i].value);
+        }
+    }
+    this.totalTopping = totalToppings
+    console.log(this.totalTopping)
+    this.total = this.totalMenu + this.totalSize + this.totalTopping
+    document.getElementById("price").innerHTML = '$'+this.total
+}
+</script>
